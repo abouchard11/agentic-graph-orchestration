@@ -45,7 +45,7 @@
       "owns": ["payouts"],
       "closer": "script",
       "irreversible": false,
-      "doneWhen": "Payout inside each creator rate band"
+      "doneWhen": "Payout inside each creator rate band and brand escrow funded"
     },
     {
       "id": "accept",
@@ -109,7 +109,7 @@
       "owns": ["escrow"],
       "closer": "policy",
       "irreversible": true,
-      "doneWhen": "Posted + no open dispute"
+      "doneWhen": "Escrow funded + posted + no open dispute"
     }
   ]
 }
