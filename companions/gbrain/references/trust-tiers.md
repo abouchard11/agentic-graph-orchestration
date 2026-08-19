@@ -1,6 +1,11 @@
+---
+description: "Trust tiers for memory notes. Read before promoting observed text to persist."
+connections: [lanes, verbs]
+---
+
 # Trust tiers
 
-A note without a tier is `observed`. Observed notes die with the session.
+A note without a tier is `observed`. Observed notes die with the session. Lane choice lives in [[lanes]]. Persist verbs live in [[verbs]].
 
 ## observed
 
@@ -18,7 +23,7 @@ Examples:
 
 - `npm test` passed, so "31 production-imported tests" may be stored.
 - `lint-graph.js` passed, so the topology may be stored.
-- Stripe webhook / session retrieve says `paid`, so "escrow funded" may be stored.
+- Stripe session retrieve says `paid`, so "escrow funded" may be stored.
 - `gbrain doctor --json` is healthy, so the brain itself may be written.
 
 Closer: script or policy.

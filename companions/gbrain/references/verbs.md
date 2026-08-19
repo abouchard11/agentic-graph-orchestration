@@ -1,6 +1,11 @@
+---
+description: "GBrain and Graphiti verbs. Read only after a store probe and a lane choice."
+connections: [lanes, trust-tiers]
+---
+
 # Verbs
 
-Use the store that is actually installed. Probe, then act.
+Use the store that is actually installed. Probe, then act. Lane first ([[lanes]]), then tier ([[trust-tiers]]).
 
 ## Probe
 

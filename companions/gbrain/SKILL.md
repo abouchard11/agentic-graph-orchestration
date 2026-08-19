@@ -1,138 +1,76 @@
 ---
 name: gbrain-graph-companion
-description: Pair GBrain (and Graphiti) with a closed-loop agent graph so memory writes are verified increments, not chat residue. Use when the user mentions GBrain, gbrain, remember this, memory sync, Graphiti vs GBrain, trust tiers, persist a learning, or when an agentic graph needs durable recall across sessions.
+description: "Gate GBrain and Graphiti writes so the model drafts notes but cannot own remember, forget, or persist. Use when the user mentions GBrain, gbrain, remember this, persist a learning, memory sync, Graphiti vs GBrain, trust tiers, or session-end memory. Not for product UI, Stripe, or building GBrain itself."
+type: workflow
+lifecycle: active
 ---
 
-# GBrain Graph Companion
+# GBrain Graph Companion — The model does not own remember
 
-GBrain is Garry Tan's markdown brain — hybrid search, pages, facts, MCP verbs. This skill is **not** GBrain. It is the missing closer: **the model does not own `remember`.**
+Pair with `agentic-graph-orchestration`. That skill owns work topology. This one owns what may outlive the process.
 
-Pair it with `agentic-graph-orchestration`. That skill owns work topology. This one owns what is allowed to persist after the graph stops.
+**Hard rule:** `remember`, `forget`, and `persist` are irreversible. Auto-capturing a session into GBrain is a skill violation. Draft a scratch note. Do not promote it.
 
-## Hard rule
+## Workflow
 
-**Memory is an irreversible edge.** `remember`, `forget`, and `persist` stay open until a verifier or a human closes them. Auto-capturing a session into GBrain so the next chat "knows everything" is a skill violation.
+1. **Recall first.** Probe stores, then search. Do not write a page that restates a verified page.
+2. **Pick a lane.** Graphiti = entities/episodes. GBrain = pages/learnings. `MEMORY.md` = cache only. See `references/lanes.md`.
+3. **Draft** a scratch note with `tier`, `lane`, `closer`, `verifier`. Closer for this node is `model`.
+4. **Verify** with the script, not a vibe:
 
-The model may draft a note. It may not promote that note to durable memory.
+   ```sh
+   python3 .grok/skills/gbrain-graph-companion/scripts/lint-note.py .scratch/note.md
+   ```
 
-## Lanes (do not collapse)
+   Fail closed on `observed`, secrets, duplicate lanes, or "paid"/"posted" without a closed-node verifier.
+5. **Persist** only if lint exits 0 and tier is `verified` or `decided`. Closer is `policy` or `human`. Then `gbrain capture` or Graphiti `add_memory` with `group_id`.
+6. **Forget** only after a human or policy closer. Propose a retraction. Do not delete.
 
-| Lane | Canonical for | Not for |
-|------|----------------|---------|
-| **Graphiti** | Durable entities, episodes, cross-project facts. Scoped by `group_id`. | Chat leftovers, CLAUDE.md guidance, code-index search |
-| **GBrain** | Markdown pages, retros, skill learnings, code-indexed search, CLAUDE.md guidance | Substituting for Graphiti entity truth |
-| **Harness `MEMORY.md`** | Read-first hydration cache | Anything authoritative |
+If nothing verified at session end: write nothing.
 
-On conflict: live tree > Graphiti > GBrain page > harness cache.
+Graph: `examples/memory-loop.json` (`recall → draft-note → verify-note → remember`).
 
-Alex's existing fence stands: **do not substitute GBrain for Graphiti.** If Graphiti is up and the fact is an entity or episode, write Graphiti. If GBrain is down, do not invent a third store.
+## Lanes and tiers (essentials)
 
-Details: `references/lanes.md`.
+| Lane | Owns | Never |
+|---|---|---|
+| Graphiti | Entities, episodes, `group_id` facts | CLAUDE.md guidance, code search |
+| GBrain | Pages, retros, skill learnings | Substituting for Graphiti |
+| `MEMORY.md` | Read-first cache | Anything authoritative |
 
-## Trust tiers
+Conflict order: live tree > Graphiti > GBrain page > harness cache.
 
-Every candidate note gets one tier before it may persist:
+| Tier | Persist? |
+|---|---|
+| `observed` | No |
+| `verified` | Script / policy |
+| `decided` | Human / policy after a graph node closed |
+| `irreversible` | Same closer as accept / post / pay — never the model |
 
-| Tier | Meaning | Who may persist |
-|------|---------|-----------------|
-| `observed` | Model saw it this session | Nobody. Stays in the transcript. |
-| `verified` | Script, test, receipt, or independent checker confirmed | Script / policy |
-| `decided` | Human or policy closed a graph node | Human / policy |
-| `irreversible` | Money, accept, post, publish, delete, identity, legal | Never the model |
+See `references/trust-tiers.md` and `references/verbs.md`.
 
-Details: `references/trust-tiers.md`.
+## Knowledge graph
 
-## Procedure
+Start at `references/INDEX.md`.
 
-### 1. Recall before you invent
+### Cross-skill connections
 
-If GBrain or Graphiti is available, search first.
+- [[agentic-graph-orchestration:]] — work topology; irreversible product edges
+- Do not replace that skill. A passed `pay` node may produce a `decided` memory. An open `pay` node may not.
 
-```sh
-gbrain think "what do we already know about X"
-# or Graphiti search_nodes / search_memory_facts with the project group_id
-```
+## Common issues
 
-Do not write a new page that restates a verified page.
+| Symptom | Fix |
+|---|---|
+| GBrain down / `gbrain doctor` fails | Skip persist. Do not invent a third store |
+| Fact is a person/company/episode | Graphiti with `group_id`. Pointer only in GBrain |
+| Want to dump the transcript | Refuse. One short learning page max |
+| Note says paid/posted | Require the product node already passed |
+| Same sentence in both stores | Pick one durable lane |
 
-### 2. Draft, then verify, then persist
+## Output
 
-Same loop as captions in Dozen:
-
-```
-recall → draft-note → verify-note → remember
-```
-
-- `draft-note` closer = model. Owns a scratch file, never the brain.
-- `verify-note` closer = script. Checks tier, lane, secrets, and "is this already stored?"
-- `remember` closer = policy or human. Irreversible.
-
-Lint that graph (`examples/memory-loop.json`) with the parent linter before you wire it.
-
-### 3. What may be remembered
-
-Persist only:
-
-- A verifier result (test passed, node closed, anomaly held)
-- A human decision (bench refill, batch approved, pay released)
-- A skill learning that is reusable next session (trigger + what failed + the gate)
-- A pointer to a source (commit SHA, Stripe session id, issue number)
-
-Never persist:
-
-- Raw transcripts
-- Secrets, tokens, customer PII
-- Speculative plans marked as facts
-- "The campaign paid" unless the pay node actually passed
-- The same fact to Graphiti **and** GBrain without a reconciliation rule
-
-### 4. Forget is also irreversible
-
-`forget` / delete-page / delete-episode is a human or policy closer. The model may propose a retraction. It may not wipe the brain.
-
-### 5. Session end
-
-On SessionEnd / retro:
-
-1. List candidate notes with tiers.
-2. Persist only `verified` and `decided`.
-3. Write at most one short learning page, not the whole transcript.
-4. If nothing verified, write nothing.
-
-## Verbs
-
-When GBrain is installed, prefer its verbs. When it is not, write a markdown page the same way and stop — do not fake an MCP.
-
-| Intent | GBrain | Graphiti | Fallback |
-|--------|--------|----------|----------|
-| Search | `gbrain think` / `gbrain search` | `search_nodes` + `search_memory_facts` | Read `references/` + repo docs |
-| Draft | scratch file | — | `.scratch/note.md` |
-| Persist | `gbrain capture` after verify | `add_memory` with `group_id` | Do not persist |
-| Retract | `forget` after human | `delete_*` after human | Leave it |
-
-Details: `references/verbs.md`.
-
-## Companion contract
-
-This skill does not replace `agentic-graph-orchestration`. Load that skill for topology. Load this one when a node wants to outlive the process.
-
-If both are loaded:
-
-- Graph nodes still cannot be closed by the model.
-- A passed `pay` node may produce a `decided` memory. An open `pay` node may not.
-- Inner loops still must set `restarts: []`. A bad note does not restart intake.
-
-## Anti-patterns
-
-- Dumping the session into GBrain so the next agent "has context."
-- Using GBrain as a second Graphiti.
-- Letting `remember` have `closer: model`.
-- Writing "paid" or "posted" to memory while those graph nodes are still `running`.
-- Trusting harness `MEMORY.md` over Graphiti.
-
-## Output expectations
-
-- Lane chosen first (Graphiti / GBrain / do not persist).
-- Trust tier on every candidate note.
-- A linted memory graph before the first `capture`.
-- After persist: slug or episode id, tier, and the verifier that closed it.
+- Lane + tier on every candidate
+- `lint-note.py` exit 0 before capture
+- After persist: slug or episode id, tier, verifier
+- After skip: one line saying why

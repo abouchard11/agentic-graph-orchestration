@@ -1,6 +1,11 @@
+---
+description: "When to use Graphiti vs GBrain vs harness MEMORY.md. Read before any persist."
+connections: [trust-tiers, verbs]
+---
+
 # Lanes
 
-Three stores exist in this author's stack. They are not interchangeable.
+Three stores exist in this author's stack. They are not interchangeable. See [[trust-tiers]] before promoting a note and [[verbs]] before calling a store.
 
 ## Graphiti (canonical entity graph)
 
