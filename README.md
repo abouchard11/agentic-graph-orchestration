@@ -88,3 +88,11 @@ node scripts/lint-graph.js companions/gbrain/examples/memory-loop.json
 ## License
 
 MIT. Copyright (c) 2026 Alex Bouchard. See `LICENSE`.
+
+## Related
+
+- [midnight-agent-skills](https://github.com/abouchard11/midnight-agent-skills) — this skill plus the GBrain companion as a drop-in pair (private)
+- [dozen](https://github.com/abouchard11/dozen) — reference product graph (private)
+- [graphiti-neo4j-ops](https://github.com/abouchard11/graphiti-neo4j-ops) — Graphiti store the memory companion treats as canonical
+- [llm-safety-gate](https://github.com/abouchard11/llm-safety-gate) — fail-closed safety node
+- [yapoleons-court](https://github.com/abouchard11/yapoleons-court) — shipped game where the model cannot own the score
