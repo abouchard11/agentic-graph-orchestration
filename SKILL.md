@@ -65,7 +65,7 @@ For each loop:
 3. Request a minimal first draft or experiment.
 4. Run the verifier immediately.
 5. Keep only if the verifier passes and the change is understood; otherwise revert.
-6. Persist only verified increments.
+6. Persist only verified increments. Load `companions/gbrain/SKILL.md` if the increment should outlive the process — the model may draft a note; it may not own `remember`.
 7. Ask for the next incremental step.
 
 For research / optimization loops: constrain the editable surface, give one cheap metric, fixed budget per experiment, keep or discard, repeat.
@@ -87,6 +87,7 @@ Treat durable procedures as markdown skills that can be loaded on demand.
 - One skill = one reusable, testable workflow with clear triggers and success criteria.
 - Prefer progressive disclosure: short SKILL.md + references/ for depth.
 - Markdown is code — write the skill so any compatible agent can execute it.
+- **GBrain companion** (`companions/gbrain/`) owns persist/recall. Graphiti stays canonical for entities. GBrain holds pages. Harness `MEMORY.md` is a cache. Do not substitute GBrain for Graphiti.
 
 ### 6. Safety, budgets, and escape hatches
 
@@ -111,6 +112,7 @@ A second, smaller topology lives in `examples/coding-loop.json` (plan → implem
 ```sh
 node scripts/lint-graph.js examples/dozen-graph.json
 node scripts/lint-graph.js examples/coding-loop.json
+node scripts/lint-graph.js companions/gbrain/examples/memory-loop.json
 node --test scripts/lint-graph.test.js
 ```
 
@@ -125,6 +127,7 @@ The linter fails a graph that is missing a verifier, a stop condition, a closer,
 - `references/prior-art.md`
 - `examples/dozen-graph.md`
 - `examples/coding-loop.md`
+- `companions/gbrain/SKILL.md`
 
 ## Anti-patterns
 
@@ -133,6 +136,7 @@ The linter fails a graph that is missing a verifier, a stop condition, a closer,
 - Parallel agents writing the same files without isolation.
 - Letting the model declare done without external proof.
 - Auto-closing accept / post / pay so a demo can finish in one pass.
+- Auto-capturing a session into GBrain so the next chat "has context."
 - Restarting the whole graph because one inner-loop node failed.
 
 ## Output expectations

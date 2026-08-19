@@ -3,9 +3,8 @@
   "private": true,
   "description": "Verifier-first skill for closed-loop agent graphs. Accept and post stay open.",
   "license": "MIT",
-  "author": "Alex Bouchard <alex@midnightdev.dev>",
   "scripts": {
-    "lint-graphs": "node scripts/lint-graph.js examples/dozen-graph.json && node scripts/lint-graph.js examples/coding-loop.json",
+    "lint-graphs": "node scripts/lint-graph.js examples/dozen-graph.json && node scripts/lint-graph.js examples/coding-loop.json && node scripts/lint-graph.js companions/gbrain/examples/memory-loop.json",
     "test": "node --test scripts/lint-graph.test.js && npm run lint-graphs"
   }
 }

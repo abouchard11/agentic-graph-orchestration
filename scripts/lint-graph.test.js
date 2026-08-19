@@ -4,6 +4,7 @@ const test = require("node:test");
 const { lintGraph, loadAndLint } = require("./lint-graph.js");
 
 const examples = path.join(__dirname, "..", "examples");
+const memoryExample = path.join(__dirname, "..", "companions/gbrain/examples/memory-loop.json");
 
 test("dozen graph passes", () => {
   assert.deepEqual(loadAndLint(path.join(examples, "dozen-graph.json")), []);
@@ -11,6 +12,29 @@ test("dozen graph passes", () => {
 
 test("coding loop passes", () => {
   assert.deepEqual(loadAndLint(path.join(examples, "coding-loop.json")), []);
+});
+
+test("memory loop passes — remember is not model-owned", () => {
+  assert.deepEqual(loadAndLint(memoryExample), []);
+});
+
+test("model cannot close remember", () => {
+  const errors = lintGraph({
+    name: "cheat-memory",
+    goal: "Dump the session into GBrain so the next chat knows.",
+    stop: { maxUsd: 1 },
+    nodes: [
+      {
+        id: "remember",
+        dependsOn: [],
+        owns: ["brain"],
+        closer: "model",
+        irreversible: true,
+        doneWhen: "captured the transcript",
+      },
+    ],
+  });
+  assert.ok(errors.some((e) => /irreversible/.test(e)));
 });
 
 test("model cannot close accept", () => {

@@ -16,6 +16,9 @@ const IRREVERSIBLE_IDS = new Set([
   "merge",
   "safety",
   "deploy",
+  "remember",
+  "forget",
+  "persist",
 ]);
 
 const CLOSERS = new Set(["model", "human", "policy", "script"]);

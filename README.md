@@ -12,16 +12,12 @@ Drop `SKILL.md` into Claude Code, Codex, or Grok skills. The agent is then requi
 
 This repo is **private** on purpose. Do not flip it public until the cookbook and the clickable demo are both sharper than a blog post.
 
-## Author
-
-Alex Bouchard
-
 ## Install
 
 ```sh
 # Claude Code / compatible agents
 mkdir -p ~/.claude/skills/agentic-graph-orchestration
-cp -R SKILL.md references examples scripts ~/.claude/skills/agentic-graph-orchestration/
+cp -R SKILL.md references examples scripts companions ~/.claude/skills/agentic-graph-orchestration/
 ```
 
 Or clone this repo into your project's `.claude/skills/` or `.grok/skills/`.
@@ -53,6 +49,7 @@ Already in the wild:
 - A **skill** that forces topology + verifier-first discipline across Claude / Codex / Grok, with a **machine-checkable linter**.
 - A **hard rule** that external edges (accept, post, pay) stay open until a human or an explicit policy closes them.
 - A **reference product** (`examples/dozen-graph.md`) — an influencer-marketplace graph with fail-closed FTC / fake-engagement / banned-vertical gates — not another coding-agent hello world.
+- A **GBrain companion** that applies the same hard rule to memory: observed notes die; only verified increments persist; Graphiti stays the entity store.
 
 That last point is the actual delta. Graph-engineering skills tell a coding agent how to fan out. This one tells a *product* which nodes the model is not allowed to own.
 
@@ -77,8 +74,17 @@ examples/dozen-graph.json    # linted machine spec
 examples/coding-loop.md      # smaller coding-agent topology
 scripts/lint-graph.js        # fail a graph that cheats
 scripts/graph-template.js    # script-held orchestration skeleton
+companions/gbrain/           # GBrain companion: model does not own remember
+```
+
+## GBrain companion
+
+`companions/gbrain/` is a second skill. GBrain stores pages. Graphiti stays canonical for entities. The model drafts notes; `remember` / `forget` are irreversible.
+
+```sh
+node scripts/lint-graph.js companions/gbrain/examples/memory-loop.json
 ```
 
 ## License
 
-MIT. See `LICENSE`.
+MIT. Copyright (c) 2026 Alex Bouchard. See `LICENSE`.
