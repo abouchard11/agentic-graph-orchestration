@@ -12,6 +12,10 @@ Drop `SKILL.md` into Claude Code, Codex, or Grok skills. The agent is then requi
 
 This repo is **private** on purpose. Do not flip it public until the cookbook and the clickable demo are both sharper than a blog post.
 
+## Author
+
+Alex Bouchard
+
 ## Install
 
 ```sh
