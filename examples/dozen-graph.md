@@ -2,22 +2,24 @@
 
 Agent-first marketplace: brands paste a brief; agents assemble 6–16 micros (1k–50k followers). The model drafts. It does not own FTC, fake-engagement, accept, post, or pay.
 
+Machine spec: `examples/dozen-graph.json` (must pass `node scripts/lint-graph.js`).
+
 ## Node table
 
-| Node | Depends on | Owns | Done when |
-|------|------------|------|-----------|
-| intake | — | parsed brief | Budget ≥ $200, niche + platform present |
-| safety | intake | policy | Fail-closed banned verticals |
-| assemble | safety | slot list | 6–16 micros, fee math, fake-risk cap |
-| offer | assemble | payouts | Payout inside each creator's rate band |
-| accept | offer | slot.status | ≥60% accept **or explicit** bench refill |
-| draft | accept | captions | Drafts exist only for accepted seats |
-| verify | draft | verifier[] | FTC + must-say + avoid |
-| revise | verify | same captions | ≤2 selective retries on this subgraph only |
-| review | revise | brand taste | Brand sees only the batch |
-| post | review | live URLs | Disclosure still present on every accepted slot |
-| measure | post | ER | Not anomalous vs baseline |
-| pay | measure | escrow | Posted + no open dispute |
+| Node | Depends on | Owns | Closer | Done when |
+|------|------------|------|--------|-----------|
+| intake | — | parsed brief | script | Budget ≥ $200, niche + platform present |
+| safety | intake | policy | policy | Fail-closed banned verticals |
+| assemble | safety | slot list | script | 6–16 micros, fee math, fake-risk cap |
+| offer | assemble | payouts | script | Payout inside each creator's rate band |
+| accept | offer | slot.status | human | ≥60% accept **or explicit** bench refill |
+| draft | accept | captions | model | Drafts exist only for accepted seats |
+| verify | draft | verifier[] | script | FTC + must-say + avoid |
+| revise | verify | same captions | script | ≤2 selective retries on this subgraph only |
+| review | revise | brand taste | human | Brand sees only the batch |
+| post | review | live URLs | human | Disclosure still present on every accepted slot |
+| measure | post | ER | script | Not anomalous vs baseline |
+| pay | measure | escrow | policy | Posted + no open dispute |
 
 ## Closed loops
 
@@ -26,4 +28,11 @@ Agent-first marketplace: brands paste a brief; agents assemble 6–16 micros (1k
 
 ## What was wrong in the one-pass build
 
-Accept and post were auto-marked passed so the demo could finish in one handler. That violated the skill. They are now real nodes.
+Accept and post were auto-marked passed so the demo could finish in one handler. That violated the skill. They are now real nodes:
+
+- Launch leaves slots `proposed` and accept `running`.
+- `acceptOffer` / `declineOffer` are live creator edges.
+- `refillFromBench` is the explicit policy close — a brand action, not a model guess.
+- `approveBatch` opens post. It does not pay.
+- `postSlot` / `postBench` re-check disclosure fail-closed.
+- `releasePayouts` refuses until `allPosted`.

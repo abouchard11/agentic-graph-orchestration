@@ -8,6 +8,9 @@ Drop `SKILL.md` into Claude Code, Codex, or Grok skills. The agent is then requi
 2. Model the job as a graph of nodes, edges, and anchors — not a monologue.
 3. Keep loops closed (keep / revert / retry on evidence).
 4. Never let the model own irreversible gates (accept, post, pay, publish, safety).
+5. Lint the graph JSON. A graph that fails the linter is not ready to implement.
+
+This repo is **private** on purpose. Do not flip it public until the cookbook and the clickable demo are both sharper than a blog post.
 
 ## Install
 
@@ -19,25 +22,57 @@ cp -R SKILL.md references examples scripts ~/.claude/skills/agentic-graph-orches
 
 Or clone this repo into your project's `.claude/skills/` or `.grok/skills/`.
 
+```sh
+node scripts/lint-graph.js examples/dozen-graph.json
+node --test scripts/lint-graph.test.js
+```
+
 ## What is novel, and what is not
 
-**Not novel as isolated ideas.** Graph engineering, loop engineering, Karpathy's 7-step inner loop, Claude Code dynamic workflows, Superpowers, GStack, and several graph-skill repos already exist. LangGraph / CrewAI / ADK already orchestrate agents.
+**Not novel as isolated ideas.** Read `references/prior-art.md` before claiming otherwise.
+
+Already in the wild:
+
+| Work | What it is | Stars (Aug 2026) |
+|------|------------|------------------|
+| Superpowers (obra) | Test-driven agentic skills framework | ~243k |
+| Anthropic skills + Skill Creator | Official skill format | ~157k |
+| GStack (garrytan) | Virtual eng team as slash commands | ~118k |
+| Community Karpathy guidelines | Four behavioral rules | ~144k–174k |
+| LangGraph / CrewAI / ADK | Runtime orchestration | large |
+| [graph-engineering](https://github.com/VineeTagarwaL-code/graph-engineering) | Claude skill: nodes, fan-out, human approval | 6 |
+| [graph-engineering-skills](https://github.com/NITISH-R-G/graph-engineering-skills) | 8 skills on loop/graph engineering | 1 |
+| [graph-engineering-skill](https://github.com/mlopscommunity/graph-engineering-skill) | Design work as a graph, not a line | 0 |
 
 **The useful synthesis here:**
 
-- A **skill** that forces topology + verifier-first discipline across Claude / Codex / Grok.
+- A **skill** that forces topology + verifier-first discipline across Claude / Codex / Grok, with a **machine-checkable linter**.
 - A **hard rule** that external edges (accept, post, pay) stay open until a human or an explicit policy closes them.
 - A **reference product** (`examples/dozen-graph.md`) — an influencer-marketplace graph with fail-closed FTC / fake-engagement / banned-vertical gates — not another coding-agent hello world.
 
-If you want 25k stars later, the path is not "another SKILL.md." It is this repo as the **canonical closed-loop graph cookbook** plus one product people can click. Keep it private until the cookbook and the demo are both sharp.
+That last point is the actual delta. Graph-engineering skills tell a coding agent how to fan out. This one tells a *product* which nodes the model is not allowed to own.
+
+## 25k stars?
+
+Unlikely from `SKILL.md` alone. Superpowers and GStack got there as installable daily drivers with a known person attached. Isolated graph-engineering skill repos are sitting at 0–6 stars.
+
+A path that *could* get there later (not now):
+
+1. Keep this private until the linter, two examples, and the Dozen demo are tight.
+2. Ship the skill **with** the clickable product, not as a manifesto.
+3. Write one launch essay: "The model does not own accept or post."
+4. Do not compete with GStack or Superpowers on "be a virtual engineering team." Compete on **product graphs with fail-closed external edges**.
 
 ## Layout
 
 ```
-SKILL.md                  # loaded on trigger
-references/               # progressive disclosure
-examples/dozen-graph.md   # live product topology
-scripts/graph-template.js # script-held orchestration skeleton
+SKILL.md                     # loaded on trigger
+references/                  # progressive disclosure + prior art
+examples/dozen-graph.md      # live product topology
+examples/dozen-graph.json    # linted machine spec
+examples/coding-loop.md      # smaller coding-agent topology
+scripts/lint-graph.js        # fail a graph that cheats
+scripts/graph-template.js    # script-held orchestration skeleton
 ```
 
 ## License

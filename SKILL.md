@@ -21,6 +21,10 @@ Progression: LLM → Prompt → Agent → Loop → Graph.
 
 Always prefer the smallest topology that works.
 
+## Hard rule
+
+**The model does not own irreversible edges.** Accept, post, pay, publish, transfer, delete, and safety gates stay `running` until a human, a policy, or an independent verifier closes them. Auto-closing those nodes so a demo can finish in one handler is a skill violation.
+
 ## Procedure
 
 ### 1. Clarify the goal and the success criteria
@@ -37,9 +41,9 @@ Ask or infer:
 
 Draw a small table:
 
-| Node | Depends on | Owns (files / scope) | Done when (verifier) |
-|------|------------|----------------------|----------------------|
-| ...  | ...        | ...                  | ...                  |
+| Node | Depends on | Owns (files / scope) | Closer | Done when (verifier) |
+|------|------------|----------------------|--------|----------------------|
+| ...  | ...        | ...                  | model / human / policy / script | ... |
 
 Rules:
 
@@ -48,7 +52,9 @@ Rules:
 - Put verification nodes after synthesis nodes.
 - Isolate mutable state (git worktrees, separate scratchpads, or pure functional handoffs).
 - Human taste review nodes stay outside the automated loop.
-- Do not auto-close external edges (accept, post, pay, publish) to make a demo look finished.
+- Do not auto-close external edges to make a demo look finished.
+
+Then encode the table as JSON and run `node scripts/lint-graph.js <file>`. A graph that cannot pass the linter is not ready to implement.
 
 ### 3. Implement the closed loop
 
@@ -70,7 +76,7 @@ Prefer script-held orchestration over pure conversational multi-agent.
 
 - Script owns the loop, branching, retries, and intermediate variables.
 - Subagents receive only the context they need and return structured results.
-- Failure policy: selective retry of the failed node + dependents only.
+- Failure policy: selective retry of the failed node + dependents only. Never restart intake because a caption failed FTC.
 
 Roles that commonly appear: Orchestrator, Doer, Judge / Verifier, Synthesizer, Safety gate (fail-closed).
 
@@ -92,11 +98,23 @@ Treat durable procedures as markdown skills that can be loaded on demand.
 
 ## Reference implementation
 
-`examples/dozen/` documents the live marketplace graph:
+`examples/dozen-graph.md` + `examples/dozen-graph.json` document the live marketplace graph:
 
 intake → safety → assemble → offer → **accept** → draft → verify → revise → review → **post** → measure → pay
 
 Accept and post are real nodes. They stay `running` until a human or an explicit bench action closes them. The model drafts captions only.
+
+A second, smaller topology lives in `examples/coding-loop.json` (plan → implement → verify). Use that when the job is a coding agent, not a product graph.
+
+## Lint before you ship
+
+```sh
+node scripts/lint-graph.js examples/dozen-graph.json
+node scripts/lint-graph.js examples/coding-loop.json
+node --test scripts/lint-graph.test.js
+```
+
+The linter fails a graph that is missing a verifier, a stop condition, a closer, or that lets the model own an irreversible edge.
 
 ## Reference files
 
@@ -104,7 +122,9 @@ Accept and post are real nodes. They stay `running` until a human or an explicit
 - `references/claude-graph.md`
 - `references/yc-personal-agi.md`
 - `references/user-patterns.md`
+- `references/prior-art.md`
 - `examples/dozen-graph.md`
+- `examples/coding-loop.md`
 
 ## Anti-patterns
 
@@ -113,11 +133,12 @@ Accept and post are real nodes. They stay `running` until a human or an explicit
 - Parallel agents writing the same files without isolation.
 - Letting the model declare done without external proof.
 - Auto-closing accept / post / pay so a demo can finish in one pass.
+- Restarting the whole graph because one inner-loop node failed.
 
 ## Output expectations
 
 - Explicit goal + success criteria + stop conditions first.
-- A node table before implementation.
+- A node table (and a linted JSON graph) before implementation.
 - Machine-checkable verifiers where possible.
 - Budget and failure policies.
 - After execution, a short retrospective.

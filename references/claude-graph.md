@@ -17,6 +17,7 @@ A straight-line agent is a degenerate graph.
 - Classifier-router
 - Produce-then-check
 - Hierarchical orchestrator-worker
+- Open external edge (human / policy must close)
 
 ## Node design
 
@@ -24,6 +25,7 @@ A straight-line agent is a degenerate graph.
 - Explicit ownership of files or data slices.
 - Clear done-when verifier that does not rely on the same agent that produced the work.
 - Isolation when parallelism is used.
+- A `closer` field: `model`, `human`, `policy`, or `script`. Irreversible nodes cannot be `model`.
 
 ## Dynamic workflows
 
@@ -33,3 +35,5 @@ The orchestration script:
 - Holds intermediate results in variables.
 - Implements loops, conditionals, retries, and budgets in code.
 - Returns only the final structured result.
+
+If the script is "the model will decide when we are done," you do not have a graph. You have a monologue with extra steps.

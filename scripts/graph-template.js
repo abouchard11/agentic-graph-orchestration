@@ -1,57 +1,41 @@
 /**
  * Script-held orchestration skeleton.
  * The script owns the loop and intermediate state; agents do the work.
+ * Irreversible nodes must be closed by a human or a policy, not by the model.
  */
 
-async function runGraph(goal, context) {
-  const nodes = {
-    plan: {
-      dependsOn: [],
-      owns: ["PLAN.md"],
-      doneWhen: "PLAN.md exists and contains measurable success criteria",
-      run: async () => ({ planPath: "PLAN.md" }),
-    },
-    implement: {
-      dependsOn: ["plan"],
-      owns: ["src/", "tests/"],
-      doneWhen: "targeted tests pass and the diff is reviewable",
-      run: async () => ({ diffSummary: "..." }),
-    },
-    verify: {
-      dependsOn: ["implement"],
-      owns: [],
-      doneWhen: "verifier returns CLEAN_PASS",
-      run: async () => {
-        const result = await runVerifier();
-        if (!result.pass) throw new Error("Verifier failed: " + result.reason);
-        return result;
-      },
-    },
-  };
-
+async function runGraph(nodes, order, hooks = {}) {
   const state = {};
-  const order = ["plan", "implement", "verify"];
-
   for (const name of order) {
     const node = nodes[name];
+    if (!node) throw new Error(`unknown node ${name}`);
+    if (node.closer === "model" && node.irreversible) {
+      throw new Error(`${name}: model cannot close an irreversible edge`);
+    }
+    if (node.closer === "human" || node.closer === "policy") {
+      const close = hooks[name];
+      if (typeof close !== "function") {
+        state[name] = { status: "running", reason: `${name} stays open until a ${node.closer} closes it` };
+        return { halted: name, state };
+      }
+    }
     let attempts = 0;
-    const maxAttempts = 3;
+    const maxAttempts = node.maxAttempts || 1;
     while (attempts < maxAttempts) {
       try {
         state[name] = await node.run(state);
         break;
-      } catch (e) {
+      } catch (error) {
         attempts += 1;
-        if (attempts >= maxAttempts) throw e;
+        if (attempts >= maxAttempts) throw error;
       }
     }
   }
-
-  return { final: state.verify, artifacts: state };
+  return { halted: null, state };
 }
 
 async function runVerifier() {
   return { pass: true, reason: "ok" };
 }
 
-module.exports = { runGraph };
+module.exports = { runGraph, runVerifier };
