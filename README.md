@@ -85,10 +85,9 @@ companions/gbrain/           # GBrain companion: model does not own remember
 node scripts/lint-graph.js companions/gbrain/examples/memory-loop.json
 ```
 
-## License
+## Rights
 
-MIT. Copyright (c) 2026 Alex Bouchard. See `LICENSE`.
-
+**Proprietary — all rights reserved. No license is granted.** See [LICENSE](LICENSE).
 ## Related
 
 - [midnight-agent-skills](https://github.com/abouchard11/midnight-agent-skills) — this skill plus the GBrain companion as a drop-in pair (private)
