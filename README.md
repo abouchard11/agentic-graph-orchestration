@@ -12,6 +12,20 @@ Drop `SKILL.md` into Claude Code, Codex, or Grok skills. The agent is then requi
 
 This repo is **private** on purpose. Do not flip it public until the cookbook and the clickable demo are both sharper than a blog post.
 
+## Stack
+
+```
+agentic-graph-orchestration     ← THIS REPO: canonical work topology + linter
+        ↑ consumed by
+midnight-agent-skills           ← packaging pair (work + memory closer)
+        ↑ consumed by
+midnight-reasoning              ← reflection / critic library
+        ↑ consumed by
+hermes-command-center           ← operator UI + run state
+```
+
+Ownership is directed. This repo is a source of truth. Downstream consumers read it; they do not edit it from product work.
+
 ## Install
 
 ```sh
@@ -88,9 +102,12 @@ node scripts/lint-graph.js companions/gbrain/examples/memory-loop.json
 ## Rights
 
 **Proprietary — all rights reserved. No license is granted.** See [LICENSE](LICENSE).
+
 ## Related
 
 - [midnight-agent-skills](https://github.com/abouchard11/midnight-agent-skills) — this skill plus the GBrain companion as a drop-in pair (private)
+- [midnight-reasoning](https://github.com/abouchard11/midnight-reasoning) — cross-run reflection / critic library (private)
+- [hermes-command-center](https://github.com/abouchard11/hermes-command-center) — operator UI that consumes this stack (private)
 - [dozen](https://github.com/abouchard11/dozen) — reference product graph (private)
 - [graphiti-neo4j-ops](https://github.com/abouchard11/graphiti-neo4j-ops) — Graphiti store the memory companion treats as canonical
 - [llm-safety-gate](https://github.com/abouchard11/llm-safety-gate) — fail-closed safety node
