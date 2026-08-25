@@ -38,8 +38,11 @@ Or clone this repo into your project's `.claude/skills/` or `.grok/skills/`.
 
 ```sh
 node scripts/lint-graph.js examples/dozen-graph.json
-node --test scripts/lint-graph.test.js
+node --test scripts/lint-graph.test.js scripts/run-graph.test.js
+node scripts/run-graph.js examples/coding-loop.json
 ```
+
+`run-graph.js` is the runtime. It lints, ticks ready nodes, retries only the declared inner loop, and **halts** on human/policy nodes. The model cannot close accept, post, pay, merge, or remember.
 
 ## What is novel, and what is not
 
@@ -87,7 +90,8 @@ examples/dozen-graph.md      # live product topology
 examples/dozen-graph.json    # linted machine spec
 examples/coding-loop.md      # smaller coding-agent topology
 scripts/lint-graph.js        # fail a graph that cheats
-scripts/graph-template.js    # script-held orchestration skeleton
+scripts/run-graph.js         # script-held runtime: lint, tick, human/policy gates
+scripts/graph-template.js    # re-exports the runtime
 companions/gbrain/           # GBrain companion: model does not own remember
 ```
 
