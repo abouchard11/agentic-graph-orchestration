@@ -5,7 +5,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "check-sentinel": "node scripts/check-sentinel.js",
-    "lint-graphs": "node scripts/check-sentinel.js && node -r ./scripts/preflight-register.js scripts/lint-graph.js examples/dozen-graph.json && node -r ./scripts/preflight-register.js scripts/lint-graph.js examples/coding-loop.json && node -r ./scripts/preflight-register.js scripts/lint-graph.js companions/gbrain/examples/memory-loop.json",
+    "lint-graphs": "node scripts/check-sentinel.js && node scripts/lint.js examples/dozen-graph.json && node scripts/lint.js examples/coding-loop.json && node scripts/lint.js companions/gbrain/examples/memory-loop.json",
     "test": "node --test scripts/lint-graph.test.js scripts/run-graph.test.js scripts/check-sentinel.test.js scripts/preflight-sentinel.test.js && npm run lint-graphs",
     "run": "node scripts/run-graph.js"
   }
