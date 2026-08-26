@@ -4,8 +4,9 @@
   "description": "Verifier-first skill for closed-loop agent graphs. Accept and post stay open.",
   "license": "UNLICENSED",
   "scripts": {
-    "lint-graphs": "node scripts/lint-graph.js examples/dozen-graph.json && node scripts/lint-graph.js examples/coding-loop.json && node scripts/lint-graph.js companions/gbrain/examples/memory-loop.json",
-    "test": "node --test scripts/lint-graph.test.js scripts/run-graph.test.js && npm run lint-graphs",
+    "check-sentinel": "node scripts/check-sentinel.js",
+    "lint-graphs": "node scripts/check-sentinel.js && node scripts/lint-graph.js examples/dozen-graph.json && node scripts/lint-graph.js examples/coding-loop.json && node scripts/lint-graph.js companions/gbrain/examples/memory-loop.json",
+    "test": "node --test scripts/lint-graph.test.js scripts/run-graph.test.js scripts/check-sentinel.test.js && npm run lint-graphs",
     "run": "node scripts/run-graph.js"
   }
 }
