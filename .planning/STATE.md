@@ -33,11 +33,27 @@
   relayed from the bouchard-breaker IP session; the underlying filing is not something
   this session can verify — treat as operator-owned).
 
-## Cross-session note (2026-08-27)
+## Cross-session note (2026-08-27, corrected)
 
 `85b3970` was authored by a different session (bouchard-breaker/IP stream). Verified here:
-additive only, one file, nothing clobbered, tree clean and in sync. Its "novelty ledger is
-stale" call was **correct in substance** — `references/prior-art.md` now carries a
-retraction — but two of its three cited shipped-competitors did not survive independent
-verification (tirith is terminal security, not a memory quarantine store;
-mcp-capability-guard was not found). Corrections recorded in prior-art.md.
+additive only, one file, nothing clobbered, tree clean and in sync.
+
+Its "novelty ledger is stale" call was **correct**. This session then disputed two of its
+competitor citations and **that dispute was wrong** — both verified at source once the red-team
+packet arrived: tirith's quarantine store is real at
+`crates/tirith-core/src/artifact/quarantine.rs`, and `mcp-capability-guard` exists with a first
+commit at 2026-08-20T23:13:33Z. Corrected in `references/prior-art.md`; the method lesson
+(read code and the commits API, never a web-search summary, for new or zero-star repos) is
+recorded there too.
+
+## Memory-write hazard (2026-08-27) — affects every session
+
+Graphiti `add_memory` returns "queued for processing" and can then **silently drop the write**.
+Root cause per the IP stream, reproduced here: Gemini returns 503 under load, Graphiti calls the
+LLM for entity extraction on every episode, and `graphiti_core/llm_client/gemini_client.py`
+raises a bare exception, so the MCP layer logs nothing and still reports success. `get_status`
+only probes Neo4j and stays green through it.
+
+**All five of this session's memory writes were lost this way** — confirmed by `get_episodes`
+returning nothing for this group. Rule: after any `add_memory`, read the episode back before
+treating the fact as stored.
