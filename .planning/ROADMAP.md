@@ -14,25 +14,39 @@ with the linter that proves it.*
 - Open · Public vs. private (publishing is irreversible — operator gate; launch essay must
   honor `references/prior-art.md`, including the 2026 academic convergence).
 
-## Phase 1 — Positioning & packaging
+## Phase 1 — midnight-reasoning localization (reordered ahead of positioning 2026-08-27)
+
+**Why first:** the flagship's most distinctive claim — *an unverified accusation never
+reaches memory* — is currently a labeled SYNTHETIC stand-in. Make the best claim true
+before anyone sees the demo. The premise for deferring this is gone: midnight-reasoning
+is now local at `~/projects/midnight-reasoning` with `src/policy.ts`, a `promotable()`
+gate in `src/graphiti.ts`, a production Graphiti adapter, and AGENTS.md stating the
+0.6-floor dual-polarity rule verbatim. This is wiring, not building.
+
+**Goal:** the critic contract is installed code, not a citation from memory.
+- Swap the kingpet `verify-briefs` stand-in for the real pass; demo runs green on it.
+- Taxonomy decision: add a `critic` closer type to the linter (schema change: `CLOSERS`,
+  loop-verifier rule) **or** document that `script` means "deterministic contract,
+  whatever sits inside." Decide once, record here, test either way. (Concern #2.)
+- **Do not demo-claim past `midnight-reasoning/KNOWN-GAPS.md`** — contradiction
+  reconciliation untested, group isolation collapsed in the v1 sidecar, lexical recall
+  limits. The demo's claim must be exactly what the gate actually enforces.
+**Done when:** kingpet demo runs with the real critic; taxonomy decision + tests landed;
+demo copy audited against KNOWN-GAPS.
+
+## Phase 2 — Positioning & packaging (internal until the IP stream clears launch)
 
 **Goal:** an outside developer understands and runs the product in ten minutes.
 - Name decision (operator) + README rewrite, product-first: what it guarantees, the
   30-second demo (lint refuses a model-closed `pay` node), pointer to the flagship.
 - Quickstart proven cold: clone → `npm test` → lint an example → watch a gate refuse.
-- Visibility decision (public/private) explicitly taken, not defaulted.
+- Positioning claim is the **coupling**, not primacy — see `references/prior-art.md`
+  "Shipped implementations." Write-time memory governance ships elsewhere already.
+- Visibility decision (public/private) explicitly taken, not defaulted. See
+  `.planning/IP-CONSTRAINTS.md`: no public flip / launch essay / name announcement
+  before a filing receipt exists. Drafting internally is unblocked; publishing is not.
 **Done when:** a stranger-shaped test run (fresh clone, README only) reaches a refused
-irreversible edge without help; name + visibility recorded here.
-
-## Phase 2 — midnight-reasoning localization
-
-**Goal:** the critic contract is installed code, not memory.
-- Locate/clone midnight-reasoning; install next to the stack; swap the kingpet
-  `verify-briefs` SYNTHETIC stand-in for the real pass (0.6 floor, dual polarity).
-- Taxonomy decision: add a `critic` closer type to the linter (schema change: `CLOSERS`,
-  loop-verifier rule) **or** document that `script` means "deterministic contract,
-  whatever sits inside." Decide once, record here, test either way.
-**Done when:** kingpet demo runs with the real critic; taxonomy decision + tests landed.
+irreversible edge without help; name recorded here; publication still gated.
 
 ## Phase 3 — Second domain example (deploy/release graph)
 

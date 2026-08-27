@@ -22,7 +22,7 @@ LangGraph, CrewAI, Google ADK, Temporal+LLM workers. These *run* graphs. This re
 
 ## Academic convergence (2026 — found via web sweep 2026-08-27)
 
-The core concepts are now published research. None of it ships as product.
+The core concepts are now published research.
 
 - **Agentproof** (arXiv 2603.20356) — static verification of agent workflow graphs as a
   mandatory CI gate; checks reachability of destructive tools and human-review-before-
@@ -44,11 +44,41 @@ The core concepts are now published research. None of it ships as product.
 - **GStack memory-sync** — push curated `~/.gstack/` state to private git. Complementary cadence, not a store of product truth.
 - **Graphiti** — entity/episode graph. Canonical here for people, companies, and project facts. GBrain is not a substitute.
 
+## Shipped implementations (2026-08-27 — corrects an earlier "nothing ships" claim)
+
+An earlier draft of this file said the 2026 concepts had no shipping implementations.
+**That is false and is retracted.** Verified by direct search:
+
+- **Total Recall** — write-gated memory for Claude Code, with a Show HN thread. Multiple
+  repos carry the name (`gavdalf/total-recall`, `claude-total-recall/total-recall`); one
+  gates writes on "will this change future behavior?", another blocks a shrinking
+  overwrite by an un-refreshed caller. Write-time memory governance **ships today.**
+- **OWASP `www-project-agent-memory-guard`** — a `MemoryGuard.write` gate with
+  YAML-defined policy actions: allow / redact / quarantine / block. An OWASP project is
+  about as public as prior art gets.
+
+Claims relayed from the IP stream that did **not** survive verification — do not cite
+these without re-checking, and never carry them into a filing as written:
+
+- **`sheeki03/tirith` is mischaracterized.** It is a *terminal* security tool (homograph
+  URLs, pipe-to-shell, ANSI injection, malicious skill/config interception), not a
+  content-addressed quarantine store for agent memory. The quarantine-verb overlap
+  appears to come from OWASP agent-memory-guard, a different project.
+- **`mcp-capability-guard` (single-use warrants) — not found.** MCP authorization tooling
+  is abundant (`General-Analysis/mcp-guard`, capability-token patterns, OAuth 2.1 scoping),
+  but this specific project and its "burned warrant" behavior did not surface.
+- Star counts, authorship, and dated "pre-conception" timing claims are unverified here.
+
+**Positioning that survives the evidence:** not primacy. The defensible claim is the
+*coupling* — typed closers + static gate + runtime + integrity sentinel + memory
+promotion, running together with receipts across multiple domains. Individual legs have
+shipped elsewhere; the composition and the discipline are the product.
+
 ## What this repo adds on top
 
 1. **External edges stay open.** Human-approval-gates in coding skills are "ask before merge." Here, accept / post / pay are first-class product nodes that the model cannot mark passed.
 2. **A linter.** `scripts/lint-graph.js` fails a graph that lets the model own an irreversible edge. Most skill repos are prose. (Since 2026: the *concept* is published — see Agentproof above — so the honest claim is shipping, not invention: a working, mutation-tested, sentinel-hardened gate you can run today, not a paper.)
 3. **A product graph, not a coding graph.** Dozen is a marketplace with FTC, fake-engagement, and payout verifiers. The worked example is not "plan → implement → test."
-4. **A memory companion with the same hard rule.** `remember` / `forget` are irreversible. Graphiti stays the entity store. GBrain holds pages. Harness `MEMORY.md` is a cache.
+4. **A memory companion with the same hard rule.** `remember` / `forget` are irreversible. Graphiti stays the entity store. GBrain holds pages. Harness `MEMORY.md` is a cache. (Weakest novelty leg — Total Recall and OWASP agent-memory-guard both ship write-time gates; see "Shipped implementations" above. What is ours is the *coupling* of the memory gate to the same closer/verifier contract the rest of the graph runs on.)
 
 If a later public launch essay skips this file, it is dishonest.
