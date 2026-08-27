@@ -120,7 +120,7 @@ node scripts/lint.js companions/gbrain/examples/memory-loop.json
 node --test scripts/lint-graph.test.js
 ```
 
-`scripts/lint.js` refuses to run if `scripts/lint-graph.js` is not the canonical hash. Copying a passing file onto a drifted install is a human action.
+`scripts/lint.js` refuses to run if `scripts/lint-graph.js` is not the canonical hash. A drifted install is repaired with `node scripts/sync-gates.js --to <install>` — a deliberate, committed release step (the checker itself never copies, and nothing repairs automatically on drift).
 
 The linter fails a graph that is missing a verifier, stop condition, or closer; lets the model own an irreversible edge (including clear compound actions such as `release-payout`, `place-order`, or `send-email`); mistypes an `irreversible` declaration; contains dependency cycles or unreachable cycle components; assigns overlapping path surfaces to unordered parallel nodes; duplicates a loop id; omits an independent verifier from a retry loop; or declares a self-verifying or ownership-conflicted verifier.
 
