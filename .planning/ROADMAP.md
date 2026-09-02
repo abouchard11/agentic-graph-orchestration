@@ -66,8 +66,9 @@ from README.
 
 **Goal:** gates close from Kiel's "What needs my decision?" queue.
 - One coordination conversation covers: Kiel reading `decision-queue.json` (contract
-  already emitted by the kingpet demo), a closeNode round-trip, and syncing the
-  git-tracked, currently-DRIFTED `.grok` install via `sync-gates.js`.
+  already emitted by the kingpet demo), a closeNode round-trip, and **committing** the
+  `.grok` install — already synced to canonical on disk (2026-09-01, sentinel in-sync) but
+  uncommitted, with its sentinel scripts still untracked (5 of 14 gate files).
 **Done when:** a gate closed in Kiel closes the node in a live run; `.grok` sentinel green.
 
 ## Backlog (tracked in `.planning/codebase/CONCERNS.md` — numbers refer to it)
