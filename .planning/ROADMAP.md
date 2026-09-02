@@ -10,11 +10,13 @@ with the linter that proves it.*
 - 2026-08-27 · Productize the stack (over T&S SaaS, contest clone, or parking) — operator.
 - 2026-08-27 · KingPet routes rejected; kingpet-integrity repo = flagship synthetic showcase.
 - 2026-08-27 · "Copy is a human action" → deliberate, committed release step (`sync-gates.js`).
+- 2026-09-01 · KingPet fork healed: origin's memory sidecar + local graph/demo merged; the
+  08-30 "Phase 0 signed authorization" framing did not survive — real-data phases stay parked.
 - Open · Product name (repo/group/slug stay `agentic-graph-orchestration` until decided).
 - Open · Public vs. private (publishing is irreversible — operator gate; launch essay must
   honor `references/prior-art.md`, including the 2026 academic convergence).
 
-## Phase 1 — midnight-reasoning localization (reordered ahead of positioning 2026-08-27)
+## Phase 1 — midnight-reasoning localization — DONE 2026-09-01 (contract + memory leg)
 
 **Why first:** the flagship's most distinctive claim — *an unverified accusation never
 reaches memory* — is currently a labeled SYNTHETIC stand-in. Make the best claim true
@@ -33,6 +35,9 @@ gate in `src/graphiti.ts`, a production Graphiti adapter, and AGENTS.md stating 
   limits. The demo's claim must be exactly what the gate actually enforces.
 **Done when:** kingpet demo runs with the real critic; taxonomy decision + tests landed;
 demo copy audited against KNOWN-GAPS.
+**Landed:** `memory/` (KingPet `bab0972`…`7642b4e`) ports the contract; demo `remember` runs
+it (`ProjectsKingPet` 09-01). Residual: LLM critic verdicts not invoked in the synthetic demo
+(by design); taxonomy decision still open → carried to Phase 2 backlog.
 
 ## Phase 2 — Positioning & packaging (internal until the IP stream clears launch)
 
