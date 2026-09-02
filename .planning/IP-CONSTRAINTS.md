@@ -49,3 +49,19 @@ contradiction reconciliation untested, group isolation collapsed in v1 sidecar, 
   `hq/outputs/memory-hygiene-discovery-script-2026-08-27.md`. No demos on discovery calls.
 - ~55% estimate that a major vendor ships native governance within 9 months → the consulting
   window is now; the launch window follows the filing receipt.
+
+## 5. Record moved out of the shipped ledger (2026-09-01)
+
+`references/prior-art.md` ships to every install (midnight-agent-skills mirror, Kiel `.grok`),
+so it no longer carries IP-process language or art that bears on the sealed component rather
+than on this layer. Preserved here instead:
+
+- 2026-08-27 this session disputed two references relayed from the red team — `sheeki03/tirith`
+  (`crates/tirith-core/src/artifact/quarantine.rs`, public 2026-06-21) and
+  `adamabdo-xynora/mcp-capability-guard` (first commit 2026-08-20T23:13:33Z) — and was wrong
+  on both; verified at source the same day. Both already sit in `bouchard-breaker-ip/IDS-CANDIDATES.md`
+  under the red team's judge-verified section. They are art for the sealed component's legs, not
+  for this repo's closers/linter/memory companion, which is why they do not belong in the shipped
+  ledger. Never filter material references here; route them to counsel via the IP repo.
+- The corrected Total Recall identifier is `davegoldblatt/total-recall` (2026-02-05, 201★);
+  two unrelated repos share the name.

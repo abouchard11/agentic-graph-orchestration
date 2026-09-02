@@ -44,48 +44,29 @@ The core concepts are now published research.
 - **GStack memory-sync** — push curated `~/.gstack/` state to private git. Complementary cadence, not a store of product truth.
 - **Graphiti** — entity/episode graph. Canonical here for people, companies, and project facts. GBrain is not a substitute.
 
-## Shipped implementations (verified 2026-08-27 — supersedes two earlier claims)
+## Shipped implementations (verified 2026-08-27; corrects an earlier "nothing ships" claim)
 
 An earlier draft of this file said the 2026 concepts had no shipping implementations.
-**That is false and is retracted.** Then a same-day "correction" in this file disputed two
-competitor citations relayed from the IP stream. **That dispute was itself wrong and is
-also retracted.** Both were verified at source; the IP stream was right and this file was
-wrong. Corrected record:
+**That is false and is retracted.** Verified at source:
 
-- **`sheeki03/tirith` — `crates/tirith-core/src/artifact/quarantine.rs`** (public,
-  2026-06-21). Its own module doc opens "Content-addressed quarantine store." Blob store
-  keyed by lowercase-hex SHA-256 (`<root>/blobs/sha256/<digest>`), written once and
-  immutable (`0o400`); an artifact is copied and **re-hashed after copy and again at
-  install**; the store "does no resolving, no inspection, and no policy evaluation" — a
-  blind mover — with inspection and verdict living in later stages of the D1→D3→D4
-  pipeline. Every property previously disputed here is in the source.
-  *This file earlier called tirith "terminal security, not a memory quarantine store."
-  That was wrong: it is terminal security **and** it contains a content-addressed
-  quarantine store. Judging the repo by its README was the error.*
-- **`adamabdo-xynora/mcp-capability-guard`** — public, **first commit 2026-08-20T23:13:33Z**
-  (verified via the commits API; repo created 02:34Z the next day). Description: single-use
-  capability tokens bound to one exact mutation, burn-on-mismatch, human confirmation for
-  destructive writes, a store-level floor no consent overrides, token-fingerprinting audit
-  log. *This file earlier said it "was not found." It exists; it has zero stars, which is
-  precisely why a web search could not see it.*
-- **Total Recall** — write-gated memory for Claude Code (Show HN thread; public 2026-02-05
-  per the IP stream). Write-time memory governance ships and predates this work.
-- **OWASP `www-project-agent-memory-guard`** — `MemoryGuard.write` gate with YAML policy
-  actions allow / redact / quarantine / block.
+- **`davegoldblatt/total-recall`** — write-gated memory for Claude Code (public 2026-02-05,
+  201 stars, Show HN). Gates writes on "will this change future behavior?" Write-time memory
+  governance ships and predates this work. (Two unrelated repos share the name; this is the one.)
+- **OWASP `www-project-agent-memory-guard`** — a `MemoryGraphiti.write`-style gate with YAML
+  policy actions allow / redact / quarantine / block. An OWASP project is about as public as
+  prior art gets.
 
 **Method lesson, recorded so it is not repeated:** absence from web search is not absence.
-Web indexes lag or ignore new and zero-star repositories, and READMEs describe products,
-not their internals. Verify against the code and the commit API — read files, not
-descriptions. A negative asserted from a search summary is not a negative.
-
-**These references are material.** They are candidates for a practitioner's 37 CFR 1.56
-disclosure consideration. Omitting known material art is a graver problem than citing it;
-route them to counsel rather than filtering them here. (Not legal advice.)
+Web indexes lag or ignore new and zero-star repositories, and READMEs describe products, not
+their internals. Verify against the code and the commits API — read files, not descriptions.
+A negative asserted from a search summary is not a negative. (This file once disputed two
+correctly-cited references on exactly that basis; the dispute was wrong and is withdrawn.)
 
 **Positioning that survives the evidence:** not primacy. The defensible claim is the
-*coupling* — typed closers + static gate + runtime + integrity sentinel + memory
-promotion, running together with receipts across multiple domains. Individual legs have
-shipped elsewhere; the composition and the discipline are the product.
+*coupling* — typed closers + static gate + runtime + integrity sentinel + memory promotion,
+running together with receipts across multiple domains. Individual legs have shipped
+elsewhere; the composition and the discipline are the product. Art for other MidnightDev
+components is tracked in their own repos, not here.
 
 ## What this repo adds on top
 
