@@ -28,12 +28,20 @@ through the real memory gate.
 3. Second domain example — deploy/release graph.
 4. Kiel wiring — blocked on Grok coordination.
 
-## Blocked / waiting
+## 2026-09-02 — leak found and closed
 
-- **Kiel `.grok` install:** synced to canonical on disk (sentinel IN-SYNC) but **uncommitted**
-  on `phase-1/recovery`, which is 19 commits behind origin, and the sentinel scripts are
-  still untracked there (5 of 14 gate files tracked). Half a release: the copy happened, the
-  commit didn't. Handoff note for Grok delivered to the operator 2026-09-01.
+`.planning/IP-CONSTRAINTS.md` (operator IP notes naming the sealed component) was found in
+two installs — Kiel `.grok` and `~/.claude/skills-backburner` — left by a sync that predated
+the `.planning` exclusion. Copy-only sync could never remove it, and a routine `git add` of
+the Kiel install would have committed it into a repo another agent reads. Neither copy was
+ever tracked or pushed: the Kiel one was untracked, the backburner one gitignored, and the
+`midnight-agent-skills` mirror plus all six Hermes profile installs were clean. Fixed at the
+mechanism (`--prune`, `2be6a90`, tests written first), pruned from both installs, verified by
+a full-filesystem scan that only canonical holds the file. Also: `references/prior-art.md`
+had shipped with IP-process language until `414e90e` — the Kiel install carried that stale
+copy until today's re-sync.
+
+## Blocked / waiting
 - Public launch — gated on filing receipt; none on disk.
 - Memory hazard note: another session (08-29) built `write-episode.py` for direct
   Neo4j-verified writes and recorded intent to tighten the read-back rule; the global

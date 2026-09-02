@@ -65,10 +65,9 @@ from README.
 ## Phase 4 — Kiel wiring (external dependency: Grok)
 
 **Goal:** gates close from Kiel's "What needs my decision?" queue.
-- One coordination conversation covers: Kiel reading `decision-queue.json` (contract
-  already emitted by the kingpet demo), a closeNode round-trip, and **committing** the
-  `.grok` install — already synced to canonical on disk (2026-09-01, sentinel in-sync) but
-  uncommitted, with its sentinel scripts still untracked (5 of 14 gate files).
+- Install side is DONE (2026-09-02, Kiel `9993c2c`). What remains is the wiring: Kiel reads
+  `decision-queue.json` (contract already emitted by the kingpet demo) and closes a node via
+  a `closeNode` round-trip against `run-graph.js`.
 **Done when:** a gate closed in Kiel closes the node in a live run; `.grok` sentinel green.
 
 ## Backlog (tracked in `.planning/codebase/CONCERNS.md` — numbers refer to it)
@@ -80,10 +79,14 @@ from README.
 - **#4 model closers auto-pass without handlers** — gate behind an explicit simulate flag.
 - **#9 human/policy loop verifiers can never fail** — one-line lint tightening + test.
 - **#8 empty-set doneWhen** — SKILL.md convention: fail-closed-on-empty unless declared.
-- **#7 sync-gates `--prune`** (opt-in) · **#10 `AGO_CANONICAL` portability** (settle before
-  Phase 4 assumes the sentinel works off this machine).
+- ~~**#7 sync-gates `--prune`**~~ **CLOSED 2026-09-02** (`2be6a90`) — and it was not
+  hypothetical: `.planning/IP-CONSTRAINTS.md` had been sitting in two installs since a
+  pre-exclusion sync, invisible to copy-only sync. Pruned from both; only canonical holds it.
+- **#10 `AGO_CANONICAL` portability** (settle before Phase 4 assumes the sentinel works off
+  this machine — Kiel's commit message now documents the env var as the workaround).
 - Test-coverage gaps from `.planning/codebase/TESTING.md`: stop ceilings, CLI wrappers,
   argv parsing, bash sentinel script, unreachable `closeNode` branch.
-- Phase 4 sharpener (concern #5): Kiel's `.grok` install tracks only 5 of 12 gate scripts —
-  a fresh Kiel clone has no drift protection; the coordination PR must land the sentinel
-  files themselves, not just the sync.
+- ~~Phase 4 sharpener (concern #5)~~ **CLOSED 2026-09-02**: Kiel `9993c2c` tracks all 14 gate
+  scripts, sentinel included; pushed to `phase-1/recovery`. A fresh Kiel clone now has drift
+  protection. (Kiel's GitHub repo has been renamed to `abouchard11/runkiel`; the local remote
+  still uses the old URL and redirects.)
