@@ -1,0 +1,26 @@
+name: test
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  npm-test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ["22", "24", "26"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      # Linter + runtime + sentinel + sync-gates suites, then the example lints.
+      - run: npm test
+      # The README's refusal demo must keep failing. A pass here means the README lies.
+      - name: README refusal demo is still refused
+        run: |
+          if node scripts/lint.js examples/refused-model-pays.json; then
+            echo "::error::examples/refused-model-pays.json passed the linter; the README quickstart is now false"
+            exit 1
+          fi
