@@ -1,6 +1,6 @@
 # STATE — agentic-graph-orchestration
 
-**As of:** 2026-09-01
+**As of:** 2026-10-13
 **Direction:** productize as governed/verifiable agent execution (operator decision
 2026-08-27). Flagship synthetic demo: `~/projects/ProjectsKingPet`, runs end to end
 through the real memory gate.
@@ -21,9 +21,9 @@ through the real memory gate.
 
 ## Next step
 
-1. **Positioning pass** (Phase 2) — draft internally. Publication gated on the IP filing
-   receipt (`.planning/IP-CONSTRAINTS.md`; `bouchard-breaker-ip` is still pre-filing as of
-   09-01). Claim the coupling, not primacy (`references/prior-art.md`).
+1. **Positioning pass** (Phase 2) — the repo is public as of 2026-10-12, so this is now the
+   live front door: quickstart proven from a cold clone, README product-first. Claim the
+   coupling, not primacy (`references/prior-art.md`).
 2. Taxonomy decision (concern #2): `critic` closer type vs. documented `script` semantics.
 3. Second domain example — deploy/release graph.
 4. Kiel wiring — blocked on Grok coordination.
@@ -41,8 +41,16 @@ a full-filesystem scan that only canonical holds the file. Also: `references/pri
 had shipped with IP-process language until `414e90e` — the Kiel install carried that stale
 copy until today's re-sync.
 
+## 2026-10-12/13 — public
+
+The repo became public on 2026-10-12 (operator decision, interview showcase), after a
+full-history secret scan (gitleaks: 0 findings) and a scan of PR/issue text. The provisional
+was filed 2026-09-02, which satisfied the old launch gate. The operator IP notes that lived at
+`.planning/IP-CONSTRAINTS.md` moved to the private IP record on 2026-10-13; git history keeps
+the earlier versions. The same day, `hq/tools/drift_sentinel.py` stopped counting `.planning/`
+(hq `2f3ecd7`): its healer had copied these notes back into two installs on 2026-09-29.
+
 ## Blocked / waiting
-- Public launch — gated on filing receipt; none on disk.
 - Memory hazard note: another session (08-29) built `write-episode.py` for direct
   Neo4j-verified writes and recorded intent to tighten the read-back rule; the global
   CLAUDE.md still says `get_episodes`. Operator's call.

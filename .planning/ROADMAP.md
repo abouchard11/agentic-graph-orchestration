@@ -13,8 +13,8 @@ with the linter that proves it.*
 - 2026-09-01 · KingPet fork healed: origin's memory sidecar + local graph/demo merged; the
   08-30 "Phase 0 signed authorization" framing did not survive — real-data phases stay parked.
 - Open · Product name (repo/group/slug stay `agentic-graph-orchestration` until decided).
-- Open · Public vs. private (publishing is irreversible — operator gate; launch essay must
-  honor `references/prior-art.md`, including the 2026 academic convergence).
+- 2026-10-12 · Public (operator decision, interview showcase). Any launch essay must still
+  honor `references/prior-art.md`, including the 2026 academic convergence.
 
 ## Phase 1 — midnight-reasoning localization — DONE 2026-09-01 (contract + memory leg)
 
@@ -39,7 +39,7 @@ demo copy audited against KNOWN-GAPS.
 it (`ProjectsKingPet` 09-01). Residual: LLM critic verdicts not invoked in the synthetic demo
 (by design); taxonomy decision still open → carried to Phase 2 backlog.
 
-## Phase 2 — Positioning & packaging (internal until the IP stream clears launch)
+## Phase 2 — Positioning & packaging (live: the repo is public)
 
 **Goal:** an outside developer understands and runs the product in ten minutes.
 - Name decision (operator) + README rewrite, product-first: what it guarantees, the
@@ -47,11 +47,10 @@ it (`ProjectsKingPet` 09-01). Residual: LLM critic verdicts not invoked in the s
 - Quickstart proven cold: clone → `npm test` → lint an example → watch a gate refuse.
 - Positioning claim is the **coupling**, not primacy — see `references/prior-art.md`
   "Shipped implementations." Write-time memory governance ships elsewhere already.
-- Visibility decision (public/private) explicitly taken, not defaulted. See
-  `.planning/IP-CONSTRAINTS.md`: no public flip / launch essay / name announcement
-  before a filing receipt exists. Drafting internally is unblocked; publishing is not.
+- Visibility: decided 2026-10-12 — public. (The filing-receipt gate it waited on was met
+  2026-09-02.)
 **Done when:** a stranger-shaped test run (fresh clone, README only) reaches a refused
-irreversible edge without help; name recorded here; publication still gated.
+irreversible edge without help; name recorded here.
 
 ## Phase 3 — Second domain example (deploy/release graph)
 
