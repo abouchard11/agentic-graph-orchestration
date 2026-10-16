@@ -110,9 +110,9 @@ companions/gbrain/           # GBrain companion: model does not own remember
 node scripts/lint-graph.js companions/gbrain/examples/memory-loop.json
 ```
 
-## Rights
+## License
 
-**Proprietary — all rights reserved. No license is granted.** See [LICENSE](LICENSE).
+Apache License 2.0. See [LICENSE](LICENSE). Copyright 2026 Alex Bouchard.
 
 ## Related
 

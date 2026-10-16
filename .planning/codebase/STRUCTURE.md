@@ -14,7 +14,7 @@ agentic-graph-orchestration/
 ├── CLAUDE.md                 # this repo's operating contract for Claude sessions
 ├── AGENTS.md                 # short generic-agent usage notes
 ├── README.md                 # human-facing pitch, stack position, install steps
-├── LICENSE                   # proprietary, all rights reserved
+├── LICENSE                   # Apache-2.0
 ├── package.json              # npm scripts: test, lint-graphs, sync-gates, run
 ├── .planning/                # STATE.md, ROADMAP.md, codebase/ (this document's home)
 ├── scripts/                  # the enforcement chain — see ARCHITECTURE.md
