@@ -1,5 +1,7 @@
 # Agentic Graph Orchestration
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23502949.svg)](https://doi.org/10.5281/zenodo.23502949)
+
 A skill (and a working product graph) for building **closed-loop multi-agent systems**.
 
 Drop `SKILL.md` into Claude Code, Codex, or Grok skills. The agent is then required to:

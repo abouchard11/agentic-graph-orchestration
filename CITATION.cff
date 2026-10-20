@@ -18,7 +18,13 @@ type: software
 repository-code: "https://github.com/abouchard11/agentic-graph-orchestration"
 url: "https://github.com/abouchard11/agentic-graph-orchestration"
 license: Apache-2.0
-date-released: 2026-08-19
+version: "1.0.0"
+doi: "10.5281/zenodo.23502949"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.23502949"
+    description: "Concept DOI: resolves to the latest archived release on Zenodo"
+date-released: 2026-10-20
 keywords:
   - "ai-agents"
   - "multi-agent"
