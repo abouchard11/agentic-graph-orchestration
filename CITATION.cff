@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "agentic-graph-orchestration"
+abstract: >-
+  A skill and a working product graph for building closed-loop multi-agent systems:
+  success criteria and a verifier are written before any work is spawned, the job is
+  modelled as a graph of nodes, edges and anchors, loops are closed on evidence,
+  irreversible gates (accept, post, pay, publish, safety) stay out of the model's hands,
+  and a linter rejects any graph that is not ready to implement.
+authors:
+  - family-names: "Bouchard"
+    given-names: "Alex"
+    email: "alex@midnightdev.dev"
+    affiliation: "MidnightDev"
+    website: "https://midnightdev.dev"
+    orcid: "https://orcid.org/0009-0003-0911-9681"
+type: software
+repository-code: "https://github.com/abouchard11/agentic-graph-orchestration"
+url: "https://github.com/abouchard11/agentic-graph-orchestration"
+license: Apache-2.0
+date-released: 2026-08-19
+keywords:
+  - "ai-agents"
+  - "multi-agent"
+  - "agent-safety"
+  - "human-in-the-loop"
+  - "workflow-graph"
+  - "static-analysis"
+  - "claude-code"
