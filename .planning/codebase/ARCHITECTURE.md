@@ -144,7 +144,7 @@ remember → forget`), lints against the same `lint-graph.js` — one linter, tw
 
 | Anti-pattern | Why it's wrong | Do this instead |
 |---|---|---|
-| Auto-closing `accept`/`post`/`remember` with `closer: model` to finish a demo in one handler | Hands the model authority over money, publication, or memory it must never hold — the bug `dozen-graph.md` documents fixing | `closer: human` or `policy`; node stays `"gate"` until `closeNode()` is called |
+| Auto-closing `accept`/`post`/`remember` with `closer: model` to finish a demo in one handler | Hands the model authority over money, publication, or memory it must never hold — the mistake `marketplace-graph.md` documents | `closer: human` or `policy`; node stays `"gate"` until `closeNode()` is called |
 | A second "is this dangerous?" check inside a runtime or caller | Two copies drift; the weaker one wins in practice | Import `inferredIrreversibleId`; extend `IRREVERSIBLE_IDS`/`_PATTERNS` in `lint-graph.js` |
 | `restarts[]` pointing outside a loop's own `nodes[]` (e.g. restarting `intake`) | "A failed caption does not restart intake" — narrow retries must stay narrow | Keep `restarts[]` inside `loop.nodes`; lint rejects anything outside it |
 | Hand-copying a gate file into an install | `check-sentinel.js` can't tell a careful copy from a stale one, and hand-copies can omit sibling files | `node scripts/sync-gates.js --to <install>`, then commit in the consuming repo |

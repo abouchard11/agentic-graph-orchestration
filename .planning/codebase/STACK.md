@@ -63,7 +63,7 @@ Entry points are `npm run` aliases over direct `node`/`python3`/`bash` calls, de
 | npm script | Underlying command |
 |---|---|
 | `npm run check-sentinel` | `node scripts/check-sentinel.js` |
-| `npm run lint-graphs` | `node scripts/check-sentinel.js && node scripts/lint.js examples/dozen-graph.json && node scripts/lint.js examples/coding-loop.json && node scripts/lint.js companions/gbrain/examples/memory-loop.json` |
+| `npm run lint-graphs` | `node scripts/check-sentinel.js && node scripts/lint.js examples/marketplace-graph.json && node scripts/lint.js examples/coding-loop.json && node scripts/lint.js companions/gbrain/examples/memory-loop.json` |
 | `npm test` | `node --test scripts/lint-graph.test.js scripts/run-graph.test.js scripts/check-sentinel.test.js scripts/preflight-sentinel.test.js scripts/sync-gates.test.js && npm run lint-graphs` |
 | `npm run sync-gates` | `node scripts/sync-gates.js` (needs `-- --to <install>`) |
 | `npm run run` | `node scripts/run-graph.js` (needs `-- <graph.json>`) |

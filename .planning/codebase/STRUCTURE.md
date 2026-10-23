@@ -47,12 +47,9 @@ agentic-graph-orchestration/
 | File | Demonstrates |
 |------|--------------|
 | `coding-loop.json` / `.md` | Smallest topology: `plan(human) → implement(model) → verify(script) → merge(human)`, with an `implement-verify` retry loop (max 3, `restarts: []`). The degenerate case other graphs sit on top of. |
-| `dozen-graph.json` / `.md` | 12-node marketplace graph: `intake → safety → assemble → offer → accept → draft → verify → revise → review → post → measure → pay`. `accept`/`post`/`pay`/`safety` held open. Reference product graph; `.md` includes a "what was wrong in the one-pass build" retro (accept/post were once auto-marked passed). |
-| `dozen-hermes-backend.json` | Scoped finish-work graph for the Dozen backend after PR #3 — a narrow, time-boxed graph rather than a full product topology. |
-| `dozen-hermes-backend-prompt.md` | Copy-paste Hermes agent prompt paired with the graph above; defines a frontend/backend file-ownership fence. |
-| `dozen-finish-prompt.md` | Copy-paste prompt for finishing Dozen's Stripe webhooks + Connect Express work against live `main`. |
+| `marketplace-graph.json` / `.md` | 12-node marketplace graph: `intake → safety → assemble → offer → accept → draft → verify → revise → review → post → measure → pay`. `accept`/`post`/`pay`/`safety` held open. Reference product graph; `.md` includes a "what was wrong in the one-pass build" retro (accept/post were once auto-marked passed). |
 | `grok-one-shot-product-build-prompt.md` | Reusable `{PLACEHOLDER}` prompt template for handing a large autonomous product build to Grok/Claude/Codex. |
-| `cookbook.md` | Short recipes: add a third irreversible edge, persist a session learning via `lint-note.py`, copy the Dozen shape for a new product. |
+| `cookbook.md` | Short recipes: add a third irreversible edge, persist a session learning via `lint-note.py`, copy the marketplace shape for a new product. |
 
 ## companions/gbrain/ — the memory-promotion companion skill
 
