@@ -9,7 +9,7 @@ Unlikely from `SKILL.md` alone. Superpowers and GStack got there as installable 
 
 A path that *could* get there later (not now):
 
-1. Keep this private until the linter, two examples, and the Dozen demo are tight.
+1. Keep this private until the linter, two examples, and the marketplace demo are tight.
 2. Ship the skill **with** the clickable product, not as a manifesto.
 3. Write one launch essay: "The model does not own accept or post."
 4. Do not compete with GStack or Superpowers on "be a virtual engineering team." Compete on **product graphs with fail-closed external edges**.
